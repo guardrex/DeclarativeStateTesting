@@ -15,12 +15,14 @@
 
     protected override void OnInitialized()
     {
-        Logger.LogInformation($"1 - CurrentCount is {CurrentCount} when OnInitialized executed");
-
         if (CurrentCount == 0)
         {
             CurrentCount = Random.Shared.Next(100);
-            Logger.LogInformation("2 - CurrentCount just set to {Count}", CurrentCount);
+            Logger.LogInformation("CurrentCount set to {Count}", CurrentCount);
+        }
+        else
+        {
+            Logger.LogInformation("CurrentCount restored to {Count}", CurrentCount);
         }
     }
 
