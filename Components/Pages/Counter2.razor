@@ -1,0 +1,28 @@
+﻿@page "/counter-2"
+@inject ILogger<Counter2> Logger
+
+<PageTitle>Prerendered Counter 2</PageTitle>
+
+<h1>Prerendered Counter 2</h1>
+
+<p role="status">Current count: @CurrentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    [SupplyParameterFromPersistentComponentState]
+    public int CurrentCount { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Logger.LogInformation($"1 - CurrentCount is {CurrentCount} when OnInitialized executed");
+
+        if (CurrentCount == 0)
+        {
+            CurrentCount = Random.Shared.Next(100);
+            Logger.LogInformation("2 - CurrentCount just set to {Count}", CurrentCount);
+        }
+    }
+
+    private void IncrementCount() => CurrentCount++;
+}
